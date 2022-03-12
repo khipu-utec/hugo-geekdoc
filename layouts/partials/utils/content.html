@@ -1,28 +1,5 @@
 {{ $content := .Content }}
 
-{{ $inDevelop := default false .Page.Params.InDevelop }}
-{{ $hintClass := default "info" .Page.Params.HintClass }}
-{{ $showLastmod := default true .Page.Params.ShowLastmod }}
-{{- if $showLastmod }}
-<blockquote class="gdoc-hint {{ $hintClass }}">
-    {{- if $inDevelop }}
-        <b>Importante:</b> Esta documentación es un trabajo en progreso.
-    {{- end }}
-    {{- $pubdate := .PublishDate.Format "Monday, January 2, 2006" }}
-    {{- if .Lastmod }}
-        {{- $lastmod := .Lastmod.Format "Monday, January 2, 2006"}}
-        {{- if ne $lastmod $pubdate }}
-            <div class="post-info-last-mod">
-                <b>Última actualización: </b>
-                <time datetime="{{ .Lastmod }}" title="{{ .Lastmod }}">
-                    {{ $lastmod }}
-                </time>
-            </div>
-        {{- end }}
-    {{- end }}
-</blockquote>
-{{- end }}
-
 {{ $content = $content | replaceRE `<nav id="TableOfContents">\s*<ul>\s*<li>\s*<ul>` `<nav id="TableOfContents"><ul>` | replaceRE `</ul>\s*</li>\s*</ul>\s*</nav>` `</ul></nav>` | safeHTML }}
 {{ $content = $content | replaceRE `(<table>(?:.|\n)+?</table>)` `<div class="table-wrap"> ${1} </div>` | safeHTML }}
 

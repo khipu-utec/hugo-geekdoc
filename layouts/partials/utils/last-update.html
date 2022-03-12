@@ -1,0 +1,19 @@
+{{ $inDevelop := default false .Page.Params.InDevelop }}
+{{ $hintClass := default "info" .Page.Params.HintClass }}
+{{ $showLastmod := default true .Page.Params.ShowLastmod }}
+{{- if $showLastmod }}
+<blockquote class="gdoc-hint {{ $hintClass }}">
+    {{- if $inDevelop }}
+        <b>Importante:</b> Esta documentación es un trabajo en progreso.
+    {{- end }}
+    {{- if .Lastmod }}
+        {{- $lastmod := .Lastmod.Format "Monday, January 2, 2006"}}
+            <div class="post-info-last-mod">
+                <b>Última actualización: </b>
+                <time datetime="{{ .Lastmod }}" title="{{ .Lastmod }}">
+                    {{ $lastmod }}
+                </time>
+            </div>
+    {{- end }}
+</blockquote>
+{{- end }}
