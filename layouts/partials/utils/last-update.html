@@ -11,7 +11,7 @@
             <div class="post-info-last-mod">
                 <b>Última actualización: </b>
                 <time datetime="{{ .Lastmod }}" title="{{ .Lastmod }}">
-                    {{ $lastmod }}
+                    {{.Lastmod.Day}} {{i18n .Lastmod.Month}} {{.Lastmod.Year}}
                 </time>
             </div>
     {{- end }}
